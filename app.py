@@ -7,6 +7,17 @@ from logging_utils import log_event
 
 app = Flask(__name__)
 
+@app.route('/oauth', methods=['GET'])
+def oauth_callback():
+    # Получаем code и state из параметров запроса
+    code = request.args.get('code')
+    state = request.args.get('state')
+
+    # Здесь будет логика обмена code на access_token через API amoCRM
+    # Пока можно просто для теста:
+    print(f"Authorization code: {code}, state: {state}")
+    return "Авторизация прошла успешно. Код авторизации получен."
+
 @app.route('/webhook', methods=['POST'])
 def handle_webhook():
     data = request.json
